@@ -31,22 +31,33 @@ public class TestBean
         address.setCountry("Austria");
 
 
-        Sector sector = new Sector();
-        sector.setName("Sektor A");
+        Sector seatedSector = new Sector();
+        seatedSector.setName("Sektor A (seated)");
 
-        LinkedList<Place> places = new LinkedList<>();
-        // Add 20 places
+        Sector standingSector = new Sector();
+        standingSector.setName("Sektor A (seated)");
+
+        Place standingPlace = new Place();
+        standingPlace.setNumber(1);
+        standingPlace.setSeatType(SeatType.STANDING);
+        standingSector.addPlace(standingPlace);
+
+
+        LinkedList<Place> seatPlaces = new LinkedList<>();
+        // Add 20 seatPlaces
         for (int i = 1; i < 20; i++)
         {
             Place p = new Place();
             p.setNumber(i);
-            places.add(p);
-            sector.addPlace(p);
+            p.setSeatType(SeatType.SITTING);
+            seatPlaces.add(p);
+            seatedSector.addPlace(p);
         }
 
         Room room = new Room();
         room.setName("Raum 1");
-        room.addSector(sector);
+        room.addSector(seatedSector);
+        room.addSector(standingSector);
 
         Location location = new Location();
         location.setName("Oper");
@@ -66,9 +77,29 @@ public class TestBean
         performanceService.save(performance);
 
 
-        // Book tickets
-        log.info(ticketOrderService.purchaseTicketOrder(user, performance, places.subList(0,1)).toString());
 
+
+
+        // TESTS
+
+
+        // Book one seated place
+        List<Long> placeIds = seatPlaces.subList(0,1).stream().map(place -> place.getId()).toList();
+
+        log.info(ticketOrderService.purchaseTicketOrder(user, performance.getId(), placeIds).toString());
+
+
+        // Book two seated and three standing places
+        placeIds = new LinkedList<>(seatPlaces.subList(3, 5).stream().map(place -> place.getId()).toList());
+        placeIds.add(standingPlace.getId());
+        placeIds.add(standingPlace.getId());
+        placeIds.add(standingPlace.getId());
+
+        log.info(ticketOrderService.purchaseTicketOrder(user, performance.getId(), placeIds).toString());
+
+
+
+        /*
         try
         {
             log.info(ticketOrderService.purchaseTicketOrder(user, performance, places.subList(0,2)).toString());
@@ -76,6 +107,6 @@ public class TestBean
         catch (Exception e)
         {
             log.error(e.getMessage());
-        }
+        }*/
     }
 }

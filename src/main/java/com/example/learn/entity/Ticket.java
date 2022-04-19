@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "performance_place_unique", columnNames = {"performance_id","place_id"})
+        @UniqueConstraint(name = "performance_place_unique", columnNames = {"performance_id","seat_place_id"})
 })
 @ToString
 public class Ticket
@@ -22,9 +22,12 @@ public class Ticket
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude private TicketOrder ticketOrder;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Performance performance;
+    @OneToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude private Performance performance;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private Place place;
+    private Place seatPlace;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Place standingPlace;
 }

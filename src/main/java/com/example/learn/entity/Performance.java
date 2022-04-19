@@ -18,6 +18,6 @@ public class Performance
 
     private String datetime;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private Room room;
 }

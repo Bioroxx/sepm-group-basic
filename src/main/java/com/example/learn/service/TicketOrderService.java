@@ -19,7 +19,7 @@ public class TicketOrderService
     private final TicketService ticketService;
     private final TicketOrderRepository ticketOrderRepository;
 
-    public TicketOrder purchaseTicketOrder(User user, Performance performance, List<Place> places)
+    public TicketOrder purchaseTicketOrder(User user, Long performanceId, List<Long> placeIds)
     {
         TicketOrder ticketOrder = new TicketOrder();
         ticketOrder.setUser(user);
@@ -27,7 +27,7 @@ public class TicketOrderService
 
         ticketOrderRepository.save(ticketOrder);
 
-        ticketOrder.setTickets(ticketService.bookTicketsForTicketOrder(ticketOrder, performance, places));
+        ticketOrder.setTickets(ticketService.bookPlacesForTicketOrder(ticketOrder, performanceId, placeIds));
 
         return ticketOrder;
     }

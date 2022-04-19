@@ -17,6 +17,7 @@ public class Place
     private Long id;
 
     private Integer number;
+    private SeatType seatType;
 
     @ManyToOne
     @ToString.Exclude private Sector sector;
