@@ -24,5 +24,5 @@ public class User
             fetch = FetchType.EAGER,
             orphanRemoval = true,
             mappedBy = "user")
-    List<TicketOrder> ticketOrders;
+    List<Booking> bookings;
 }

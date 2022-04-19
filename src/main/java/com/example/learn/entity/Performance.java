@@ -3,6 +3,8 @@ package com.example.learn.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +19,13 @@ public class Performance
     private Long id;
 
     private String datetime;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true,
+            mappedBy = "performance")
+    private List<Price> prices = new LinkedList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
     private Room room;

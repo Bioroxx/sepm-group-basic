@@ -34,10 +34,4 @@ public class Location
             orphanRemoval = true,
             mappedBy = "location")
     List<Room> rooms = new LinkedList<>();
-
-    public void addRoom(Room room)
-    {
-        room.setLocation(this);
-        this.rooms.add(room);
-    }
 }

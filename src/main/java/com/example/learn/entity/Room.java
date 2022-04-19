@@ -30,11 +30,4 @@ public class Room
             orphanRemoval = true,
             mappedBy = "room")
     List<Sector> sectors = new LinkedList<>();
-
-    public void addSector(Sector sector)
-    {
-        sector.setRoom(this);
-        this.sectors.add(sector);
-    }
-
 }

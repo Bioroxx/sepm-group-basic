@@ -17,7 +17,7 @@ public class TicketService
     private final TicketRepository ticketRepository;
     private final PerformanceService performanceService;
 
-    public List<Ticket> bookPlacesForTicketOrder(TicketOrder ticketOrder, Long performanceId, List<Long> placeIds)
+    public List<Ticket> bookPlacesForTicketOrder(Booking booking, Long performanceId, List<Long> placeIds)
     {
         // Get performance
         Performance performance = performanceService.findById(performanceId);
@@ -53,7 +53,7 @@ public class TicketService
 
         sittingPlaces.stream().forEach(place -> {
             Ticket ticket = new Ticket();
-            ticket.setTicketOrder(ticketOrder);
+            ticket.setBooking(booking);
             ticket.setPerformance(performance);
             ticket.setSeatPlace(place);
             tickets.add(ticket);
@@ -61,7 +61,7 @@ public class TicketService
 
         standingPlaces.stream().forEach(place -> {
             Ticket ticket = new Ticket();
-            ticket.setTicketOrder(ticketOrder);
+            ticket.setBooking(booking);
             ticket.setPerformance(performance);
             ticket.setStandingPlace(place);
             tickets.add(ticket);

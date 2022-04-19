@@ -25,14 +25,8 @@ public class Sector
 
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true,
             mappedBy = "sector")
     List<Place> places = new LinkedList<>();
-
-    public void addPlace(Place place)
-    {
-        place.setSector(this);
-        this.places.add(place);
-    }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.LinkedList;
-import java.util.List;
 
 @Component
 @Slf4j
@@ -18,9 +17,18 @@ public class TestBean
     private final LocationService locationService;
     private final UserService userService;
     private final PerformanceService performanceService;
-    private final TicketOrderService ticketOrderService;
+    private final BookingService bookingService;
 
     @PostConstruct
+    public void addUser()
+    {
+        // Add user
+        User user = new User();
+        user.setUsername("Hans");
+        log.info(userService.save(user).toString());
+    }
+
+    //@PostConstruct
     public void doSomething()
     {
         // Generate data for location
@@ -40,7 +48,7 @@ public class TestBean
         Place standingPlace = new Place();
         standingPlace.setNumber(1);
         standingPlace.setSeatType(SeatType.STANDING);
-        standingSector.addPlace(standingPlace);
+        standingSector.getPlaces().add(standingPlace);
 
 
         LinkedList<Place> seatPlaces = new LinkedList<>();
@@ -51,18 +59,18 @@ public class TestBean
             p.setNumber(i);
             p.setSeatType(SeatType.SITTING);
             seatPlaces.add(p);
-            seatedSector.addPlace(p);
+            seatedSector.getPlaces().add(p);
         }
 
         Room room = new Room();
         room.setName("Raum 1");
-        room.addSector(seatedSector);
-        room.addSector(standingSector);
+        room.getSectors().add(seatedSector);
+        room.getSectors().add(standingSector);
 
         Location location = new Location();
         location.setName("Oper");
         location.setAddress(address);
-        location.addRoom(room);
+        location.getRooms().add(room);
         locationService.save(location);
 
         // Add user
@@ -71,10 +79,13 @@ public class TestBean
         userService.save(user);
 
         // Add performance
+        /*
         Performance performance = new Performance();
         performance.setDatetime("12-12-2022");
         performance.setRoom(room);
         performanceService.save(performance);
+
+         */
 
 
 
@@ -82,7 +93,7 @@ public class TestBean
 
         // TESTS
 
-
+/*
         // Book one seated place
         List<Long> placeIds = seatPlaces.subList(0,1).stream().map(place -> place.getId()).toList();
 
@@ -97,7 +108,7 @@ public class TestBean
 
         log.info(ticketOrderService.purchaseTicketOrder(user, performance.getId(), placeIds).toString());
 
-
+*/
 
         /*
         try

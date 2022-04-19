@@ -1,6 +1,6 @@
 package com.example.learn.entity;
 
-public enum OrderType
+public enum BookingType
 {
     PURCHASED,
     RESERVED

@@ -20,7 +20,7 @@ public class Ticket
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ToString.Exclude private TicketOrder ticketOrder;
+    @ToString.Exclude private Booking booking;
 
     @OneToOne(fetch = FetchType.LAZY)
     @ToString.Exclude private Performance performance;

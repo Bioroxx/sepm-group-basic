@@ -12,13 +12,13 @@ import java.util.List;
 @Setter
 @Entity
 @ToString
-public class TicketOrder
+public class Booking
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private OrderType orderType;
+    private BookingType bookingType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
@@ -27,6 +27,6 @@ public class TicketOrder
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             orphanRemoval = true,
-            mappedBy = "ticketOrder")
+            mappedBy = "booking")
     List<Ticket> tickets = new LinkedList<>();
 }
