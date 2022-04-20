@@ -1,4 +1,4 @@
-package com.example.learn.dto.post.booking;
+package com.example.learn.dto.request.booking;
 
 import java.util.List;
 

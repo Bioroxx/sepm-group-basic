@@ -1,10 +1,8 @@
 package com.example.learn.mapper;
 
-import com.example.learn.dto.get.booking.BookingDto;
-import com.example.learn.dto.get.booking.PlaceDto;
-import com.example.learn.dto.get.booking.SectorDto;
-import com.example.learn.dto.get.booking.TicketDto;
+import com.example.learn.dto.response.booking.*;
 import com.example.learn.entity.Booking;
+import com.example.learn.entity.Price;
 import com.example.learn.entity.Ticket;
 import org.springframework.stereotype.Component;
 
@@ -16,16 +14,31 @@ public class BookingMapper
         return new BookingDto(
                 booking.getId(),
                 booking.getBookingType(),
+                new PerformanceDto(
+                        booking.getPerformance().getId(),
+                        booking.getPerformance().getDatetime(),
+                        new LocationDto(
+                                booking.getPerformance().getRoom().getLocation().getId(),
+                                booking.getPerformance().getRoom().getLocation().getName(),
+                                new AddressDto(
+                                        booking.getPerformance().getRoom().getLocation().getAddress().getStreet(),
+                                        booking.getPerformance().getRoom().getLocation().getAddress().getCity(),
+                                        booking.getPerformance().getRoom().getLocation().getAddress().getCountry(),
+                                        booking.getPerformance().getRoom().getLocation().getAddress().getZipcode()))),
                 booking.getTickets().stream().map(this::ticketEntityToTicketDto).toList()
         );
     }
 
-    public TicketDto ticketEntityToTicketDto(Ticket ticket)
+    private TicketDto ticketEntityToTicketDto(Ticket ticket)
     {
         if(ticket.getSeatPlace() != null)
         {
             return new TicketDto(
                     ticket.getId(),
+                    ticket.getPerformance().getPrices().stream()
+                            .filter(prices -> prices.getSector().getId().equals(ticket.getSeatPlace().getSector().getId()))
+                            .map(Price::getCents)
+                            .findFirst().orElseThrow(),
                     new SectorDto(
                             ticket.getSeatPlace().getSector().getId(),
                             ticket.getSeatPlace().getSector().getName()),
@@ -35,6 +48,9 @@ public class BookingMapper
         {
             return new TicketDto(
                     ticket.getId(),
+                    ticket.getPerformance().getPrices().stream()
+                            .filter(prices -> prices.getSector().getId().equals(ticket.getStandingPlace().getSector().getId()))
+                            .map(Price::getCents).findFirst().orElseThrow(),
                     new SectorDto(
                             ticket.getStandingPlace().getSector().getId(),
                             ticket.getStandingPlace().getSector().getName()),

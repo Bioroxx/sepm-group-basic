@@ -1,4 +1,4 @@
-package com.example.learn.dto.get.booking;
+package com.example.learn.dto.response.booking;
 
 import com.example.learn.entity.SeatType;
 

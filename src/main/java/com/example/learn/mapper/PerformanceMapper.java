@@ -1,6 +1,6 @@
 package com.example.learn.mapper;
 
-import com.example.learn.dto.get.performance.*;
+import com.example.learn.dto.response.performance.*;
 import com.example.learn.entity.Location;
 import com.example.learn.entity.Performance;
 import com.example.learn.entity.Sector;
@@ -14,6 +14,12 @@ public class PerformanceMapper
         return new PerformanceDto(
                 performance.getId(),
                 performance.getDatetime(),
+                new EventDto(
+                        performance.getEvent().getId(),
+                        performance.getEvent().getName(),
+                        performance.getEvent().getType(),
+                        performance.getEvent().getDuration(),
+                        performance.getEvent().getDescription()),
                 entityToLocationDto(performance));
     }
 

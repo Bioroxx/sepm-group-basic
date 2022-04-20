@@ -1,4 +1,4 @@
-package com.example.learn.dto.post.performance;
+package com.example.learn.dto.request.performance;
 
 public record PriceDto(
         Long sectorId,

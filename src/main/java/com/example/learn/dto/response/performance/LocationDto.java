@@ -1,10 +1,8 @@
-package com.example.learn.dto.get.location;
-
-import java.util.List;
+package com.example.learn.dto.response.performance;
 
 public record LocationDto(
         Long id,
         String name,
         AddressDto address,
-        List<RoomDto> rooms
+        RoomDto room
 ) { }

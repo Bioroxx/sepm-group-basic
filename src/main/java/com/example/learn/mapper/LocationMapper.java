@@ -1,6 +1,6 @@
 package com.example.learn.mapper;
 
-import com.example.learn.dto.get.location.*;
+import com.example.learn.dto.response.location.*;
 import com.example.learn.entity.Location;
 import com.example.learn.entity.Room;
 import com.example.learn.entity.Sector;

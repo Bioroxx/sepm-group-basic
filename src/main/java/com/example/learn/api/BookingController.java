@@ -1,6 +1,6 @@
 package com.example.learn.api;
 
-import com.example.learn.dto.post.booking.BookingDto;
+import com.example.learn.dto.request.booking.BookingDto;
 import com.example.learn.mapper.BookingMapper;
 import com.example.learn.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class BookingController
     private final BookingMapper mapper;
 
     @PostMapping
-    public ResponseEntity<com.example.learn.dto.get.booking.BookingDto> book(@RequestBody BookingDto bookingDto)
+    public ResponseEntity<com.example.learn.dto.response.booking.BookingDto> book(@RequestBody BookingDto bookingDto)
     {
         log.info("POST /api/v1/booking " + bookingDto.toString());
 

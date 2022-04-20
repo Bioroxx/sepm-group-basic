@@ -1,6 +1,4 @@
-package com.example.learn.dto.get.performance;
-
-import com.example.learn.dto.get.location.SectorDto;
+package com.example.learn.dto.response.performance;
 
 import java.util.List;
 

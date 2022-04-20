@@ -1,7 +1,8 @@
-package com.example.learn.dto.get.booking;
+package com.example.learn.dto.response.booking;
 
 public record TicketDto(
         Long id,
+        Integer cents,
         SectorDto sector,
         PlaceDto place)
 { }

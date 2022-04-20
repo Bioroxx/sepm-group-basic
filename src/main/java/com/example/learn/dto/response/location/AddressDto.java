@@ -1,4 +1,4 @@
-package com.example.learn.dto.get.location;
+package com.example.learn.dto.response.location;
 
 public record AddressDto(
         String street,

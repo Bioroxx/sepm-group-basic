@@ -1,4 +1,4 @@
-package com.example.learn.dto.get.performance;
+package com.example.learn.dto.response.performance;
 
 public record AddressDto(
         String street,

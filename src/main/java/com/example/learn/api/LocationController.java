@@ -1,6 +1,6 @@
 package com.example.learn.api;
 
-import com.example.learn.dto.get.location.LocationDto;
+import com.example.learn.dto.response.location.LocationDto;
 import com.example.learn.entity.Location;
 import com.example.learn.mapper.LocationMapper;
 import com.example.learn.service.LocationService;

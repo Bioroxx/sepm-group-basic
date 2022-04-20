@@ -1,10 +1,7 @@
 package com.example.learn.service;
 
-import com.example.learn.dto.post.performance.PerformanceDto;
-import com.example.learn.entity.Performance;
-import com.example.learn.entity.Price;
-import com.example.learn.entity.Room;
-import com.example.learn.entity.Sector;
+import com.example.learn.dto.request.performance.PerformanceDto;
+import com.example.learn.entity.*;
 import com.example.learn.repository.PerformanceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,9 +15,14 @@ public class PerformanceService
 {
     private final PerformanceRepository performanceRepository;
     private final RoomService roomService;
+    private final EventService eventService;
 
     public Performance save(PerformanceDto performanceDto)
     {
+        // Get event
+        Event event = eventService.findById(performanceDto.eventId());
+
+
         // Get room of performanceDto
         Room room = roomService.findById(performanceDto.roomId());
 
@@ -29,6 +31,7 @@ public class PerformanceService
             throw new IllegalArgumentException("One of the sectors in this room has no price");
 
         Performance performance = new Performance();
+        performance.setEvent(event);
         performance.setDatetime(performanceDto.datetime());
         performance.setRoom(room);
 

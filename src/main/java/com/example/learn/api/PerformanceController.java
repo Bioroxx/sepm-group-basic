@@ -1,6 +1,6 @@
 package com.example.learn.api;
 
-import com.example.learn.dto.post.performance.PerformanceDto;
+import com.example.learn.dto.request.performance.PerformanceDto;
 import com.example.learn.mapper.PerformanceMapper;
 import com.example.learn.service.PerformanceService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class PerformanceController
     private final PerformanceMapper mapper;
 
     @PostMapping
-    public ResponseEntity<com.example.learn.dto.get.performance.PerformanceDto> save(@RequestBody PerformanceDto performanceDto)
+    public ResponseEntity<com.example.learn.dto.response.performance.PerformanceDto> save(@RequestBody PerformanceDto performanceDto)
     {
         log.info("POST /api/v1/performance " + performanceDto.toString());
 

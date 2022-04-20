@@ -23,6 +23,9 @@ public class Booking
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    Performance performance;
+
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,

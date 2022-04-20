@@ -20,6 +20,9 @@ public class Performance
 
     private String datetime;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude private Event event;
+
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
